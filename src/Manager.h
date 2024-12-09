@@ -33,7 +33,7 @@ namespace df
         std::string getType() const;
 
         // Startup Manager.
-        // Return 0 if ok, else negative number.
+        // Return EXIT_SUCCESS if ok, else negative number.
         virtual int startUp();
 
         // Shutdown Manager.

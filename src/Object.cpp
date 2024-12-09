@@ -20,11 +20,11 @@ namespace df
         // m_animation = Animation();
         m_altitude = MAX_ALTITUDE / 2; // Default altitude
         m_solidness = HARD;
+        m_no_soft = true;
 
         // Add to game world.
-        if (WM.insertObject(this) == 0)
+        if (WM.insertObject(this) == EXIT_FAILURE)
         {
-
             std::string msg = "Object::Constructor : " + std::to_string(m_id);
             LM.getLogger()->debug(msg.c_str());
         }
@@ -91,7 +91,7 @@ namespace df
         {
             // LM.getLogger()->debug("Object::eventHandler - STEP_EVENT");
         }
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     bool Object::isSolid() const
@@ -104,12 +104,12 @@ namespace df
         // Check for invalid solidness.
         if (new_solid != HARD && new_solid != SOFT && new_solid != SPECTRAL)
         {
-            return -1;
+            return EXIT_FAILURE;
         }
         else
         {
             m_solidness = new_solid;
-            return 0;
+            return EXIT_SUCCESS;
         }
     }
 
@@ -123,10 +123,10 @@ namespace df
         if (new_altitude < 0 || new_altitude > MAX_ALTITUDE)
         {
             LM.getLogger()->debug("Invalid altitude value: {}", new_altitude);
-            return -1;
+            return EXIT_FAILURE;
         }
         m_altitude = new_altitude;
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     int Object::getAltitude() const
@@ -185,7 +185,7 @@ namespace df
     int Object::setSprite(std::string sprite_label)
     {
         sprite_name = sprite_label;
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     /*void Object::setAnimation(Animation new_animation)
@@ -202,11 +202,11 @@ namespace df
     int Object::draw()
     {
         if (!m_animation)
-            return -1;
+            return EXIT_FAILURE;
         Vector pos = getPosition();
         pos.setX(pos.getX() - m_animation.getSprite()->getWidth() / 2);
         pos.setY(pos.getY() - m_animation.getSprite()->getHeight() / 2);
         m_animation.draw(pos);
-        return 0;
+        return EXIT_SUCCESS;
     }*/
 }

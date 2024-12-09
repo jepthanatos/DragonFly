@@ -21,7 +21,7 @@ namespace df
     {
     public:
         // Get window ready to capture input.
-        // Return 0 if ok, else return -1;
+        // Return EXIT_SUCCESS if ok, else return EXIT_FAILURE;
         int startUp();
 
         // Revert back to normal window mode.

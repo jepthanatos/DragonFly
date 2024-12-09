@@ -9,7 +9,6 @@
 #define __OBJECT_LIST_H__
 
 #include "Object.h"
-#include "ObjectListIterator.h"
 
 namespace df
 {
@@ -23,9 +22,8 @@ namespace df
     {
 
     private:
-        int m_count; // Count of objects in list.
-        int max_count;
-        Object **p_item; // Array of pointers to objects.
+        // Object **p_item; // Array of pointers to objects.
+        std::vector<Object *> m_objects;
 
     public:
         friend class ObjectListIterator; // Iterators can access.
@@ -42,18 +40,18 @@ namespace df
         bool operator!=(const ObjectList &other);
 
         // Insert object pointer in list.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int insert(Object *p_o);
 
         // Remove object pointer from list,
-        // Return 0 if found, else -1.
+        // Return EXIT_SUCCESS if found, else -1.
         int remove(Object *p_o);
 
         // Clear list (setting count to 0).
         void clear();
 
         // Return count of number of objects in list.
-        int getCount() const;
+        size_t getCount() const;
 
         // Return true if list is empty, else false.
         bool isEmpty() const;

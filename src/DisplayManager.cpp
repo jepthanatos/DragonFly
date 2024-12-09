@@ -57,7 +57,7 @@ namespace df
         if (!m_p_window)
         {
             LM.getLogger()->debug("Error! Unable to allocate RenderWindow.");
-            return -1;
+            return EXIT_FAILURE;
         }
 
         m_p_window->setMouseCursorVisible(true);
@@ -66,7 +66,7 @@ namespace df
         // Load font.
         if (m_font.loadFromFile("./WinterSong.ttf") == false)
         {
-            return -1;
+            return EXIT_FAILURE;
         }
 
         return Manager::startUp();
@@ -82,11 +82,11 @@ namespace df
 
     int DisplayManager::drawCh(Vector world_pos, char ch, sf::Color color) const
     {
-        //LM.getLogger()->debug("DisplayManager::drawCh");
+        // LM.getLogger()->debug("DisplayManager::drawCh");
         if (!m_p_window)
         {
             LM.getLogger()->error("Error! Unable to allocate RenderWindow.");
-            return -1;
+            return EXIT_FAILURE;
         }
 
         Vector pixel_pos = spacesToPixels(world_pos);
@@ -97,22 +97,22 @@ namespace df
         rectangle.setPosition(pixel_pos.getX() - charWidth() / 10,
                               pixel_pos.getY() + charHeight() / 5);
 
-        //m_p_window->draw(rectangle);
+        // m_p_window->draw(rectangle);
         static sf::Text text("", m_font);
         text.setString(ch);
         text.setStyle(sf::Text::Bold);
 
         if (charWidth() < charHeight())
-            text.setCharacterSize(charWidth() * 2);
+            text.setCharacterSize(charWidth() * 2.0);
         else
-            text.setCharacterSize(charHeight() * 2);
+            text.setCharacterSize(charHeight() * 2.0);
 
         text.setFillColor(color);
 
         text.setPosition(pixel_pos.getX(), pixel_pos.getY());
         m_p_window->draw(text);
 
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     /*int DisplayManager::drawFrame(Vector world_pos, Frame frame, bool centered,
@@ -145,7 +145,7 @@ namespace df
             offset++;
         }
 
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     // Return window's horizontal maximum (in characters).
@@ -177,19 +177,19 @@ namespace df
     }
 
     // Render current window buffer.
-    // Return 0 if ok, else -1.
+    // Return EXIT_SUCCESS if ok, else -1.
     int DisplayManager::swapBuffers()
     {
         // LM.getLogger()->debug("DisplayManager::swapBuffers");
         if (!m_p_window)
         {
             LM.getLogger()->debug("Error! Unable to allocate RenderWindow.");
-            return -1;
+            return EXIT_FAILURE;
         }
 
         m_p_window->display();
         m_p_window->clear(m_window_background_color);
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     // Return pointer to SFML drawing window.

@@ -26,17 +26,17 @@ namespace df
 
     void ObjectListIterator::next()
     {
-        if (m_index < m_p_list->m_count)
+        if (m_index < m_p_list->getCount())
             m_index++;
     }
 
     bool ObjectListIterator::isDone() const
     {
-        return (m_index == m_p_list->m_count);
+        return (m_index == m_p_list->getCount());
     }
 
     Object *ObjectListIterator::currentObject() const
     {
-        return m_p_list->p_item[m_index];
+        return m_p_list->m_objects[m_index];
     }
 }

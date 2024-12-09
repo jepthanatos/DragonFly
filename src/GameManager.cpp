@@ -41,7 +41,7 @@ namespace df
                 }
             }
         }
-        return -1;
+        return EXIT_FAILURE;
     }
 
     bool GameManager::isValid(std::string event_name) const
@@ -133,7 +133,7 @@ namespace df
     int GameManager::getFrameTime() const
     {
         // return frameTime;
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     int GameManager::getStepCount() const

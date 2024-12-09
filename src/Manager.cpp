@@ -1,6 +1,7 @@
 #include "Manager.h"
 #include "EventStep.h"
 #include "WorldManager.h"
+#include "ObjectListIterator.h"
 
 namespace df
 {
@@ -21,7 +22,7 @@ namespace df
     int Manager::startUp()
     {
         m_is_started = true;
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     void Manager::shutDown()
@@ -45,7 +46,7 @@ namespace df
             li.currentObject()->eventHandler(p_event);
         }
 
-        return 0;
+        return EXIT_SUCCESS;
     }
 
 }

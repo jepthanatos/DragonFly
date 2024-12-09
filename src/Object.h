@@ -46,6 +46,7 @@ namespace df
         // Animation m_animation;   // Animation associated with Object.
         int m_altitude;        // 0 to MAX_ALTITUDE (higher drawn on top).
         Solidness m_solidness; // Solidness state of Object.
+        bool m_no_soft;        // True if won't move on to soft objects.
 
         // const int MAX_ALTITUDE = 4;
 
@@ -77,21 +78,21 @@ namespace df
 
         // Handle event.
         // Base class ignores everything.
-        // Return 0 if ignored, else 1.
+        // Return EXIT_SUCCESS if ignored, else 1.
         virtual int eventHandler(const Event *p_event);
 
         // Return True if Object is HARD or SOFT, else false.
         bool isSolid() const;
 
         // Set solidness of Object, with checks for consistency.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int setSolidness(Solidness new_solid);
 
         // Return solidness of Object.
         Solidness getSolidness() const;
 
         // Set altitude of Object, with checks for range [0, MAX_ALTITUDE].
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int setAltitude(int new_altitude);
 
         // Return altitude of Object.
@@ -126,7 +127,7 @@ namespace df
         // Box getBox() const;
 
         // Set Sprite for this Object to animate.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int setSprite(std::string sprite_label);
 
         // Set Animation for this Object to new one.
@@ -139,10 +140,16 @@ namespace df
         // Draw Object Animation.
         virtual int draw()
         {
-            //LM.getLogger()->debug("Object::draw");
+            // LM.getLogger()->debug("Object::draw");
             DM.drawString(m_position, sprite_name, CENTER_JUSTIFIED, sf::Color::Black);
-            return 0;
+            return EXIT_SUCCESS;
         };
+
+        // Set 'no soft' setting (true − cannot move on to SOFT Objects).
+        void setNoSoft(bool new_no_soft = true) { m_no_soft = new_no_soft; }
+
+        // Get 'no soft' setting (true − cannot move on to SOFT Objects).
+        bool getNoSoft() const { return m_no_soft; };
     };
 
 } // end of namespace df

@@ -16,7 +16,7 @@ namespace df
     //              (box1.getBottom() < box2.getVertical()));
     // }
     //
-    // Box getWorldBox(const Object *p_o)
+    // Box getWorldBox(const std::shared_ptr<Object>p_o)
     //{
     //    Vector pos = p_o->getPosition();
     //    Box box = p_o->getBox();
@@ -26,7 +26,7 @@ namespace df
     //               pos.getY() + box.getBottom());
     //}
     //
-    // Box getWorldBox(const Object *p_o, Vector where)
+    // Box getWorldBox(const std::shared_ptr<Object>p_o, Vector where)
     //{
     //    Box box = p_o->getBox();
     //    return Box(where.getX() + box.getHorizontal(),

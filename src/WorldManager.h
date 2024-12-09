@@ -41,18 +41,18 @@ namespace df
         // static WorldManager &getInstance();
 
         // Startup game world (initialize everything to empty).
-        // Return 0.
+        // Return EXIT_SUCCESS.
         int startUp();
 
         // Shutdown game world (delete all game world Objects).
         void shutDown();
 
         // Insert Object into world.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int insertObject(Object *p_o);
 
         // Remove Object from world.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int removeObject(Object *p_o);
 
         // Return list of all Objects in world.
@@ -62,7 +62,7 @@ namespace df
         ObjectList objectsOfType(std::string type) const;
 
         // Indicate Object is to be deleted at end of current game loop.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int markForDelete(Object *p_o);
 
         // Update world.
@@ -81,7 +81,7 @@ namespace df
         // If Object is Spectral, move ok.
         // If move ok, adjust view if following this Object.
         // If moved from inside world boundary to outside, generate EventOut.
-        // Return 0 if move ok, else -1 if collision with solid.
+        // Return EXIT_SUCCESS if move ok, else -1 if collision with solid.
         int moveObject(Object *p_o, Vector where);
 
         // Return list of Objects collided with at position 'where'.
@@ -109,7 +109,7 @@ namespace df
 
         // Set view to center screen on Object.
         // Set to NULL to stop following.
-        // If Object not legit, return -1 else return 0.
+        // If Object not legit, return EXIT_FAILURE else return EXIT_SUCCESS.
         int setViewFollowing(Object *p_new_view_following);
 
         // Get Object view is following (NULL if none).

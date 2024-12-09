@@ -72,25 +72,25 @@ namespace df
 
     public:
         // Open graphics window ready for text-based display.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int startUp();
 
         // Close graphics window.
         void shutDown();
 
         // Draw character at window location (x,y) with color.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int drawCh(Vector world_pos, char ch, sf::Color color) const;
 
         // Draw single sprite frame at window location (x,y) with color.
         // If centered true, then center frame at (x,y).
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         /* int drawFrame(Vector world_pos, Frame frame, bool centered,
                       Color color) const; */
 
         // Draw string at window location (x,y) with color.
         // Justified left, center or right.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int drawString(Vector world_pos, std::string str, Justification just,
                        sf::Color color) const;
 
@@ -107,7 +107,7 @@ namespace df
         int getVerticalPixels() const;
 
         // Render current window buffer.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int swapBuffers();
 
         // Return pointer to SFML drawing window.

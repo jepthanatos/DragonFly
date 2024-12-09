@@ -10,7 +10,7 @@ namespace df
     int InputManager::startUp()
     {
         if (!DM.isStarted())
-            return -1;
+            return EXIT_FAILURE;
 
         DM.getWindow()->setKeyRepeatEnabled(false);
 
@@ -61,7 +61,7 @@ namespace df
             }
 
             // Mouse button pressed.
-            //if (event.type == sf::Event::MouseButtonPressed)
+            // if (event.type == sf::Event::MouseButtonPressed)
             //{
             //}
         }

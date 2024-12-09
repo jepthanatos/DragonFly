@@ -2,6 +2,8 @@
 #include "LogManager.h"
 #include "Utility.h"
 #include "EventCollision.h"
+#include "EventOut.h"
+#include "ObjectListIterator.h"
 
 namespace df
 {
@@ -44,7 +46,7 @@ namespace df
         for (li.first(); !li.isDone(); li.next())
         {
             if (li.currentObject() == p_o)
-                return 0;
+                return EXIT_SUCCESS;
         }
         return m_updates.remove(p_o);
     }
@@ -73,7 +75,7 @@ namespace df
         ObjectListIterator li(&m_deletions);
         for (li.first(); !li.isDone(); li.next())
             if (li.currentObject() == p_o)
-                return 0;
+                return EXIT_SUCCESS;
 
         return m_deletions.insert(p_o);
     }
@@ -114,7 +116,7 @@ namespace df
 
             if (not list.isEmpty())
             {
-                bool do_move = true; // Assume can move .
+                bool do_move = true; // Assume can move.
 
                 ObjectListIterator li(&list);
                 for (li.first(); !li.isDone(); li.next())
@@ -130,18 +132,26 @@ namespace df
 
                     // If both HARD, then cannot move.
                     if (p_o->getSolidness() == HARD and p_temp_o->getSolidness() == HARD)
-                        do_move = false; // Can’t move.
+                        do_move = false;
+
+                    // If object does not want to move on to soft objects, don't move.
+                    if (p_o->getNoSoft() and p_temp_o->getSolidness() == SOFT)
+                        do_move = false;
                 }
 
                 if (!do_move)
-                    return -1; // Move not allowed.
+                    return EXIT_FAILURE; // Move not allowed.
             }
         }
 
         // If here, no collision between two HARD objects so allow move.
         p_o->setPosition(where);
 
-        return 0; // Move was ok.
+        // Generate out of bounds event and send to Object.
+        EventOut ov;
+        p_o->eventHandler(&ov);
+
+        return EXIT_SUCCESS; // Move was ok.
     }
 
     ObjectList WorldManager::getCollisions(const Object *p_o, Vector where) const

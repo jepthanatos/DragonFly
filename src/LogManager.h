@@ -31,10 +31,10 @@ namespace df
 
     public:
         // Do nothing destructor.
-        ~LogManager(){};
+        ~LogManager() {};
 
         // Start up LogManager.
-        // Return 0 if ok, else -1.
+        // Return EXIT_SUCCESS if ok, else -1.
         int startUp();
 
         // Shut down LogManager (close all logfiles).

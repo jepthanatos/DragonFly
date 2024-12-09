@@ -25,7 +25,7 @@ namespace df
         {
             std::cerr << "Log file creation failed." << std::endl;
             std::cerr << ex.what() << std::endl;
-            return -1;
+            return EXIT_FAILURE;
         }
     }
 
