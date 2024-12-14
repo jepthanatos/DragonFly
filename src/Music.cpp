@@ -7,9 +7,6 @@
 
 #include "Music.h"
 
-#include <string>
-// #include <SFML/Audio.hpp>
-
 namespace df
 {
 
@@ -17,7 +14,7 @@ namespace df
   {
   }
 
-  int Music::loadMusic(std::string filename)
+  int Music::loadMusic(const std::string &filename)
   {
     if (!m_music.openFromFile(filename))
     {

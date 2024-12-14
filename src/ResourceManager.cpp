@@ -36,6 +36,7 @@ namespace df
     {
         std::string line;
         std::getline(*p_file, line);
+        discardCR(line);
         if (!p_file->good())
         {
             return "";
@@ -169,19 +170,19 @@ namespace df
         auto loadSimpleSprite = [&]() -> void
         {
             // Read sprite header
-            std::getline(file, line);
+            line = getLine(&file);
             frame_count = std::stoi(line);
 
-            std::getline(file, line);
+            line = getLine(&file);
             width = std::stoi(line);
 
-            std::getline(file, line);
+            line = getLine(&file);
             height = std::stoi(line);
 
-            std::getline(file, line);
+            line = getLine(&file);
             slowdown = std::stoi(line);
 
-            std::getline(file, line);
+            line = getLine(&file);
             if (line == "black")
             {
                 color = sf::Color::Black;
@@ -205,7 +206,7 @@ namespace df
                 std::string frame_str;
                 for (int h = 0; h < height; ++h)
                 {
-                    std::getline(file, line);
+                    line = getLine(&file);
                     // Add line to frame string
                     frame_str += line;
                 }
